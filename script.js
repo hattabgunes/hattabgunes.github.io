@@ -75,6 +75,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Mobil menü aktif link işaretleme
+    const sections = document.querySelectorAll('section');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+
+    function setActiveLink() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', setActiveLink);
+    setActiveLink(); // Sayfa yüklendiğinde çalıştır
+
     // Smooth scroll
     const links = document.querySelectorAll('a[href^="#"]');
     links.forEach(link => {
@@ -103,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     // Animasyon eklenecek elementleri seç
-    const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         observer.observe(section);
     });
