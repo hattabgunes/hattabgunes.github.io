@@ -305,18 +305,23 @@ input:checked + .slider {
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
+        z-index: 1001;
     }
 
     .nav-links {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
+        bottom: 0;
         background: var(--bg-color);
         flex-direction: column;
-        padding: 1rem;
-        box-shadow: 0 4px 6px var(--shadow-color);
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        z-index: 1000;
     }
 
     .nav-links.active {
@@ -324,8 +329,54 @@ input:checked + .slider {
     }
 
     .nav-links li {
-        text-align: center;
-        padding: 0.5rem 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Her menü öğesi için gecikmeli animasyon */
+    .nav-links li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links li:nth-child(2) { transition-delay: 0.2s; }
+    .nav-links li:nth-child(3) { transition-delay: 0.3s; }
+    .nav-links li:nth-child(4) { transition-delay: 0.4s; }
+    .nav-links li:nth-child(5) { transition-delay: 0.5s; }
+    .nav-links li:nth-child(6) { transition-delay: 0.6s; }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Hamburger menü animasyonu */
+    .menu-toggle {
+        width: 30px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active i {
+        transform: rotate(90deg);
+    }
+
+    /* Logo mobilde daha küçük olsun */
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    /* Navbar container'ı düzenle */
+    .nav-container {
+        padding: 1rem;
+        position: relative;
     }
 
     .hero-content h1 {
