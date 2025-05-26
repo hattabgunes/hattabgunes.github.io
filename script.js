@@ -75,17 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Mobil menü toggle
-    const menuToggle = document.querySelector('.menu-toggle');
+    // Mobil menü
+    const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
 
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
             
-            // Menü açıkken sayfanın scroll'unu engelle
+            // Menü açıkken scroll'u engelle
             if (navLinks.classList.contains('active')) {
                 body.style.overflow = 'hidden';
             } else {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const menuLinks = navLinks.querySelectorAll('a');
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
+                hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
                 body.style.overflow = '';
             });
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ekran boyutu değiştiğinde menüyü sıfırla
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
-                menuToggle.classList.remove('active');
+                hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
                 body.style.overflow = '';
             }
