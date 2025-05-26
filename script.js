@@ -75,56 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Mobil menü elemanları
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const body = document.body;
-    const menuLinks = document.querySelectorAll('.nav-links a');
-
-    // Hamburger menü tıklama olayı
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            toggleMenu();
-        });
-
-        // Menü linklerine tıklama
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                closeMenu();
-            });
-        });
-
-        // Sayfa dışına tıklandığında menüyü kapat
-        document.addEventListener('click', (e) => {
-            if (navLinks.classList.contains('active') && 
-                !navLinks.contains(e.target) && 
-                !hamburger.contains(e.target)) {
-                closeMenu();
-            }
-        });
-    }
-
-    // Menüyü aç/kapat
-    function toggleMenu() {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        body.classList.toggle('menu-open');
-    }
-
-    // Menüyü kapat
-    function closeMenu() {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        body.classList.remove('menu-open');
-    }
-
-    // Ekran boyutu değiştiğinde menüyü kapat
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            closeMenu();
-        }
-    });
-
     // Smooth scroll
     const links = document.querySelectorAll('a[href^="#"]');
     links.forEach(link => {
