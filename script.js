@@ -24,26 +24,37 @@ themeToggle.addEventListener('change', () => {
 document.addEventListener('DOMContentLoaded', () => {
     // Tema değiştirici
     const themeToggle = document.querySelector('.theme-toggle');
-    const themeIcon = themeToggle.querySelector('i');
+    const html = document.documentElement;
     
     // Kaydedilmiş tema tercihini kontrol et
     const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    html.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
     
     // Tema değiştirme olayını dinle
     themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const currentTheme = html.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
-        document.documentElement.setAttribute('data-theme', newTheme);
+        html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme);
+        
+        // Animasyon efekti
+        themeToggle.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            themeToggle.style.transform = 'scale(1)';
+        }, 100);
     });
     
     // Tema ikonunu güncelle
     function updateThemeIcon(theme) {
-        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        const icon = themeToggle.querySelector('i');
+        if (theme === 'dark') {
+            icon.className = 'fas fa-moon';
+        } else {
+            icon.className = 'fas fa-sun';
+        }
     }
 
     // Sistem temasını kontrol et ve uygula

@@ -103,7 +103,7 @@ nav a:hover {
     background: var(--card-bg);
     border-radius: 1rem;
     box-shadow: 0 4px 6px var(--shadow-color);
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .project-card:hover, .blog-card:hover, .skill-card:hover {
@@ -189,7 +189,8 @@ textarea {
 footer {
     text-align: center;
     padding: 2rem;
-    background: var(--accent-color);
+    background: var(--nav-bg);
+    color: var(--text-color);
 }
 
 /* Tema değiştirici stilleri kaldırıldı */
@@ -429,7 +430,7 @@ input:checked + .slider {
         padding: 3rem 1rem;
     }
 
-    .theme-switch {
+    .theme-toggle {
         top: auto;
         bottom: 20px;
     }
@@ -616,21 +617,23 @@ input:checked + .slider {
     align-items: center;
     gap: 8px;
     background: var(--card-bg);
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 30px;
     box-shadow: 0 2px 10px var(--shadow-color);
     cursor: pointer;
-    border: none;
+    border: 1px solid var(--accent-color);
     color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 .theme-toggle i {
     font-size: 1.2rem;
     transition: transform 0.3s ease;
-}
-
-.theme-toggle:hover i {
-    transform: rotate(45deg);
 }
 
 /* Linkler Dark Mode */
@@ -662,5 +665,14 @@ a:hover {
 /* Blog ve Proje Etiketleri Dark Mode */
 .project-tags span {
     background: var(--accent-color);
+    color: var(--text-color);
+}
+
+/* Blog ve Proje İçerikleri */
+.blog-content h3, .project-content h3 {
+    color: var(--text-color);
+}
+
+.blog-content p, .project-content p {
     color: var(--text-color);
 }
