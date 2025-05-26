@@ -97,7 +97,11 @@ header {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
+    background: none;
+    border: none;
     color: var(--primary-color);
+    padding: 0.5rem;
+    z-index: 1001;
 }
 
 nav a {
@@ -336,7 +340,6 @@ input:checked + .slider {
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
-        z-index: 1001;
     }
 
     .nav-links {
@@ -345,30 +348,36 @@ input:checked + .slider {
         top: 0;
         left: 0;
         right: 0;
-        height: 100vh;
+        bottom: 0;
         background: var(--bg-color);
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 2rem;
         padding: 2rem;
-        z-index: 999;
-        transition: all 0.3s ease;
+        z-index: 1000;
     }
 
     .nav-links.active {
-        display: flex !important;
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+        display: flex;
+        animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .nav-links li {
         opacity: 0;
         transform: translateY(20px);
         transition: all 0.3s ease;
-        width: 100%;
-        text-align: center;
     }
 
     .nav-links.active li {
@@ -376,14 +385,6 @@ input:checked + .slider {
         transform: translateY(0);
     }
 
-    .nav-links a {
-        display: block;
-        font-size: 1.5rem;
-        padding: 1rem;
-        width: 100%;
-    }
-
-    /* Her menü öğesi için gecikmeli animasyon */
     .nav-links li:nth-child(1) { transition-delay: 0.1s; }
     .nav-links li:nth-child(2) { transition-delay: 0.2s; }
     .nav-links li:nth-child(3) { transition-delay: 0.3s; }
@@ -391,24 +392,20 @@ input:checked + .slider {
     .nav-links li:nth-child(5) { transition-delay: 0.5s; }
     .nav-links li:nth-child(6) { transition-delay: 0.6s; }
 
-    /* Hamburger menü animasyonu */
-    .menu-toggle {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        position: relative;
-    }
-
-    .menu-toggle i {
-        font-size: 24px;
-        transition: all 0.3s ease;
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+        display: block;
+        width: 100%;
+        text-align: center;
     }
 
     .menu-toggle.active i {
         transform: rotate(90deg);
+    }
+
+    .menu-toggle i {
+        transition: transform 0.3s ease;
     }
 
     /* Header düzenlemesi */

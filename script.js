@@ -80,35 +80,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
 
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        // Menü açıkken sayfanın scroll'unu engelle
-        if (navLinks.classList.contains('active')) {
-            body.style.overflow = 'hidden';
-        } else {
-            body.style.overflow = '';
-        }
-    });
-
-    // Menü linklerine tıklandığında menüyü kapat
-    const menuLinks = document.querySelectorAll('.nav-links a');
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            navLinks.classList.remove('active');
-            body.style.overflow = '';
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            // Menü açıkken sayfanın scroll'unu engelle
+            if (navLinks.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
         });
-    });
 
-    // Ekran boyutu değiştiğinde menüyü sıfırla
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            menuToggle.classList.remove('active');
-            navLinks.classList.remove('active');
-            body.style.overflow = '';
-        }
-    });
+        // Menü linklerine tıklandığında menüyü kapat
+        const menuLinks = navLinks.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.style.overflow = '';
+            });
+        });
+
+        // Ekran boyutu değiştiğinde menüyü sıfırla
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+    }
 
     // Smooth scroll için tüm iç linkleri seç
     const links = document.querySelectorAll('a[href^="#"]');
