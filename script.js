@@ -75,56 +75,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Mobil menü
+    // Mobil menü elemanları
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
-    const menuLinks = document.querySelectorAll('.nav-links a');
-
-    function toggleMenu() {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    }
-
-    function closeMenu() {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        body.style.overflow = '';
-    }
 
     // Hamburger menü tıklama olayı
-    if (hamburger) {
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+
+        // Menü linklerine tıklama
+        const menuLinks = navLinks.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
         });
     }
 
-    // Menü linklerine tıklama olayı
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            closeMenu();
-        });
-    });
-
-    // Sayfa herhangi bir yerine tıklandığında menüyü kapat
-    document.addEventListener('click', (e) => {
-        if (navLinks.classList.contains('active') && !navLinks.contains(e.target)) {
-            closeMenu();
-        }
-    });
-
-    // Ekran boyutu değiştiğinde menüyü sıfırla
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            closeMenu();
-        }
-    });
-
-    // Smooth scroll için tüm iç linkleri seç
+    // Smooth scroll
     const links = document.querySelectorAll('a[href^="#"]');
-    
     links.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -136,28 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // İletişim formu gönderimi
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Form verilerini al
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
-            
-            // Normalde burada bir API'ye gönderim yapılır
-            // Şimdilik console'a yazdıralım
-            console.log('Form gönderildi:', data);
-            
-            // Kullanıcıya geri bildirim
-            alert('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapılacaktır.');
-            
-            // Formu temizle
-            contactForm.reset();
-        });
-    }
 
     // Scroll animasyonları için Intersection Observer
     const observerOptions = {
@@ -201,4 +155,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         lastScroll = currentScroll;
     });
+
+    // İletişim formu gönderimi
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Form verilerini al
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Normalde burada bir API'ye gönderim yapılır
+            // Şimdilik console'a yazdıralım
+            console.log('Form gönderildi:', data);
+            
+            // Kullanıcıya geri bildirim
+            alert('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapılacaktır.');
+            
+            // Formu temizle
+            contactForm.reset();
+        });
+    }
 });
