@@ -1,6 +1,5 @@
 /* Genel Stiller */
 :root {
-    /* Light Mode Renkleri */
     --primary-color: #4f46e5;
     --secondary-color: #4338ca;
     --text-color: #1f2937;
@@ -9,18 +8,6 @@
     --card-bg: #ffffff;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --nav-bg: #ffffff;
-}
-
-[data-theme="dark"] {
-    /* Dark Mode Renkleri */
-    --primary-color: #6366f1;
-    --secondary-color: #818cf8;
-    --text-color: #e5e7eb;
-    --bg-color: #111827;
-    --accent-color: #1f2937;
-    --card-bg: #1e293b;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --nav-bg: #0f172a;
 }
 
 * {
@@ -38,7 +25,6 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--bg-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Container */
