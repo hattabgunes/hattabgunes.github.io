@@ -91,6 +91,7 @@ header {
     display: flex;
     list-style: none;
     gap: 2rem;
+    align-items: center;
 }
 
 .menu-toggle {
@@ -361,18 +362,17 @@ input:checked + .slider {
         cursor: pointer;
         padding: 0;
         z-index: 1002;
-        position: relative;
     }
 
     .hamburger .line {
         width: 100%;
         height: 2px;
         background-color: var(--primary-color);
-        transition: 0.3s ease;
+        transition: transform 0.3s ease-in-out;
     }
 
     .hamburger.active .line:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+        transform: translateY(9px) rotate(45deg);
     }
 
     .hamburger.active .line:nth-child(2) {
@@ -380,15 +380,7 @@ input:checked + .slider {
     }
 
     .hamburger.active .line:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-        position: relative;
+        transform: translateY(-9px) rotate(-45deg);
     }
 
     .nav-links {
@@ -398,22 +390,27 @@ input:checked + .slider {
         left: 0;
         width: 100%;
         height: 100vh;
-        background-color: #fff;
+        background-color: var(--bg-color);
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 2rem;
         z-index: 1001;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
     }
 
     .nav-links.active {
         display: flex;
+        opacity: 1;
+        visibility: visible;
     }
 
     .nav-links li {
         opacity: 0;
         transform: translateY(20px);
-        transition: all 0.3s ease;
+        transition: all 0.3s ease-in-out;
     }
 
     .nav-links.active li {
